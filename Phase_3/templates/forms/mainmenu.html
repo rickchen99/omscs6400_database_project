@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Main Menu{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+      <header>
+        <div>
+		<h1>Welcome, {{ welcome_message[0] }} {{ welcome_message[1] }}!</h1>
+		<h1>My Rating</h1>
+		<div>{{ my_rating }}</div>
+		<h1>Unaccepted Swaps</h1>
+		<a href="{{ url_for('gameswap.accept_reject_swap') }}">{{ unaccepted_swaps }}</a>
+		<h1>Unrated Swaps</h1>
+		<a href="{{ url_for('gameswap.rate_swaps') }}">{{ unrated_swaps }}</a>
+	<form>
+		<li><a href="{{ url_for('gameswap.list_item') }}">List Item</a></li>
+		<li><a href="{{ url_for('gameswap.my_items') }}">My Items</a></li>
+		<li><a href="{{ url_for('gameswap.search_items') }}">Search Items</a></li>
+		<li><a href="{{ url_for('gameswap.swap_history') }}">Swap History</a></li>
+		<li><a href="{{ url_for('gameswap.update_user_info') }}">Update My Info</a></li>
+	</form>
+        </div>
+      </header>
+{% endblock %}

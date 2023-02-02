@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}User Registration{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <label for="Email">Email</label>
+    <input name="email" id="email" required>
+    <label for="Password">Password</label>
+    <input type="password" name="password" id="password" required>
+    <label for="First Name">First Name</label>
+    <input name="first_name" id="first_name" required>
+    <label for="Last Name">Last Name</label>
+    <input type="last_name" name="last_name" id="password" required>
+    <label for="Nickname">Nickname</label>
+    <input name="nickname" id="nickname" required>
+    <label for="Postal Code">Postal Code</label>
+    <input name="postal_code" id="postal_code" required>
+    <label for="Phone Number">Phone Number</label>
+    <input name="phone_number" id="phone_number" required>
+<!--     <select name="Phone Type" id="phone_type">
+    <label for="Phone Type">Phone Type</label> -->
+<!--     <option value=0 {% if time == 0 %} selected="selected" {% endif %}>Home</option>
+    <option value=7 {% if time == 7 %} selected="selected" {% endif %}>Work</option>
+    <option value=14 {% if time == 14 %} selected="selected" {% endif %}>Mobile</option>
+    </select> -->
+
+<!--     <select>
+    	{ % for type in phone_type_choices %}
+    		<option value="{{type}}" SELECTED>{{type}}</option>
+    	{ % endfor % }
+    </select> -->
+
+<!--     <label for="Share Phone">Share Phone</label>
+    <input name="share_phone_number" id="share_phone_number" required> -->
+    <input type="submit" value="Register">
+  </form>
+{% endblock %}

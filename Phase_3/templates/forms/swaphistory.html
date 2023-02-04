@@ -1,8 +1,148 @@
 {% extends 'base.html' %}
-
+ <h1>{% block title %}Swap History{% endblock %}</h1>
 {% block header %}
-  <h1>{% block title %}Swap History{% endblock %}</h1>
-{% endblock %}
+ 
+
+ {% endblock %}  
+ <html>
+<head>
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+
+</head>
+<body>
+<style>
+<!-- td {
+        width: 150px;
+        text-align: center;
+        border: 1px solid black;
+        padding: 5px;
+      }   -->
+  
+     
+    .bad_user{
+        background-color: rgb(218,162,175);
+    }
+    .avg_user{
+        background-color: green;
+    }
+  
+</style>
 
 {% block content %}
+<h3>Current user email is {{email}}</h3>
+<table>
+  <thead>
+    <tr>
+        {% for n in form1_column_name %}
+        <td>{{n}}</td>
+        {% endfor %}
+    </tr>
+    </thead>    
+    <tbody>
+     {% for row in form1_element %}  
+            <tr>
+                <td>{{row[0]}}</td>
+                <td>{{row[1]}}</td>
+                <td>{{row[2]}}</td>
+                <td>{{row[3]}}</td>
+                {% if row[4] >= 50 %}
+                <td class ="bad_user" >{{row[4]}}%</td>
+                {% else %}
+                <td>{{row[4]}}</td>
+                {% endif %}             
+            <tr>
+
+        {% endfor %}
+    </tbody>
+</table>
+
+<p>&nbsp;</p>
+
+<table>
+    <thead>
+        <tr>
+            {% for n in form2_column_name %}
+            {%if loop.index > 2%}
+             
+            <td>{{n}}</td>
+            {%endif%}
+            {% endfor %}
+           
+        </tr>
+        </thead>
+    <tbody>
+        {% for row in form2_element %}
+        <tr>
+            {% for item in row %}
+            {%if loop.index >2%}
+            <form method ='POST'>  
+            <td>
+                
+                {% if loop.length == loop.index and item is none and row[3] == "accepted" %}
+                {%set selection_id = row[0]~'&'~row[1] %}
+                {%set selection_id_all = row[0]~'&'~row[1] %}
+                <!-- each row's input selection form need different name and id-->
+                <!--need pass in the swap's id back to python still, need to query it and hide it in the front end -->
+               
+                 
+                     <select name="{{selection_id}}" id="aaa">
+                        <option value=null>  </option>
+                        <option value=1> 1 </option>
+                        <option value=2> 2 </option>
+                        <option value=3> 3 </option>
+                        <option value=4> 4 </option>
+                        <option value=5> 5 </option>
+                    </select>  
+                   
+                    <input type="submit" name="submit_rating" onclick="get_selection()" value ="Submit"
+                    style="color: aliceblue;background-color: #8d98c7;font-size: 8px;padding: 4px 8px;
+                    text-align: center;
+                    display: inline-block;
+                    margin: 4px 2px; border-radius: 8px;"
+                    ></input>
+                
+                   <script>
+                        function get_selection(){          
+                          var input = document.getElementById("aaa").value;
+                          document.getElementById("user_input_rating").innerHTML = input;
+                       }
+                    </script>
+                   
+ 
+                    <p class="user_input_rating"></p>
+
+               
+                {% else %}
+                {{item}}
+                {%endif %}
+            {%endif %}
+            </td></form>
+                
+            
+            {%endfor%}
+            {% for item in row %}
+            {% if loop.length == loop.index%}
+            {%set selection_id_all = row[0]~'&'~row[1] %}
+            <form method ='POST'>
+            <td> <button style="color: aliceblue;background-color: #8d98c7;font-size: 8px;padding: 4px 8px;
+                text-align: center;
+                display: inline-block;
+                margin: 4px 2px; border-radius: 8px;">Details<input type="hidden" name = "detail_link" value = "{{selection_id_all}}">
+                    </button>
+            </td></form>
+            {%endif %}
+            {%endfor%}
+
+        </tr>
+        {%endfor%}
+    </tbody>
+</table>
+</body>
+</html>
+
+
+
 {% endblock %}

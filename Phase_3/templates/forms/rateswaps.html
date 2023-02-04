@@ -3,6 +3,44 @@
 {% block header %}
   <h1>{% block title %}Rate Swaps{% endblock %}</h1>
 {% endblock %}
-
+  <br>
+  <br>
 {% block content %}
+  {% if is_empty %}
+  <div>'No unrated swaps found.'</div>
+  {% else %}
+  <table>
+    <thead>
+      <tr>
+          {% for n in cols %}
+          <th>{{n}}</th>
+          {% endfor %}
+      </tr>
+      </thead>    
+      <tbody>
+      {% set count = namespace(value=0) %}
+      {% for row in table %}  
+              <tr>
+                  <td>{{row[0]}}</td>
+                  <td>{{row[1]}}</td>
+                  <td>{{row[3]}}</td>
+                  <td>{{row[4]}}</td>
+                  <td>{{row[5]}}</td>
+                  <td>
+                    <form method="POST">
+                      <select name="rating" id="rating">
+                      {% for i in range(0,6) %}
+                      <option value="{{i}}">{{i}}</option>
+                      {% endfor %}
+                      </select>
+                      <input type="hidden" name="rownum" value="{{count}}">
+                    <input type="submit" value="Submit" />
+                    </form>
+                </td>
+              <tr>
+            {% set count.value = count.value + 1 %}
+      {% endfor %}
+      </tbody>
+  </table>
+  {% endif %}
 {% endblock %}

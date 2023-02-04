@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Search results{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+
+
+    <style>
+     td {
+            width: 150px;
+            text-align: center;
+            border: 1px solid black;
+            padding: 5px;
+          }
+        .bad_user{
+            background-color: rgb(218,162,175);
+        }
+        .avg_user{
+            background-color: green;
+        }
+
+    </style>
+    <header>
+    <div>
+        <h1>Search results</h1>
+        <table><thead>
+            <tr>
+            <th> item #</th>
+            <th> Game type</th>
+            <th> Title</th>
+            <th> Condition</th>
+            <th> Description</th>
+            <th> Distance</th>
+            <th> </th>
+            <th> </th>
+
+            </tr>
+
+        </thead>
+            <tbody>
+            {%  for row in results %}
+            {%set item_number_this_row = row[0]%}
+            <tr>
+                <td> {{ row[0] }}</td>
+                <td> {{ row[1] }}</td>
+                <td> {{ row[2] }}</td>
+                <td> {{ row[3] }} </td>
+                <td> {{ row[4] }} </td>
+                <td> {{ row[5] }} </td>
+                <td>
+                      <script>
+                        var val = 20;
+                      </script>
+
+                    <a href="{{ url_for('gameswap.view_items') }}" onclick="location.href=this.href+'?item_number='+val;return false;" >Detail </a>
+
+                </td>
+
+            </tr>
+            {%  endfor %}
+            </tbody>
+        </table>
+
+    </div>
+    </header>
+
+{% endblock %}
+
+
+

@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}View Items{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<style>
+
+    .regular_tb_cell {
+        width: 300px;
+        text-align: center;
+        border : dotted 1px black
+        padding: 10px;
+      }
+    .forms_spacing{
+        border-top: 2px solid rgb(96, 131, 160);
+        padding: 20px;
+
+    }
+    .avg_user{
+        background-color: green;
+    }
+    .brdless_tb{
+        width: 150px;
+        text-align: right;
+        padding: 10px;
+        border: 2px solid rgb(218,162,175);
+
+    }
+
+
+</style>
+
+<table>
+    <thead>
+
+    </thead>
+    <tbody>
+            <tr>
+                <td >
+                    <h3>
+                    Item details
+                    </h3>
+
+                    <table class="forms_spacing">
+
+                        <tr>
+                            <th> Item #</th>
+                            <td> {{ item_properties[0][0] }}</td>
+                        <tr>
+
+                        <tr>
+                            <th> Title </th>
+                            <td> {{ item_properties[0][1] }}</td>
+                        <tr>
+
+                         <tr>
+                            <th> Game Type </th>
+                            <td> {{ item_properties[0][2] }}</td>
+                        <tr>
+
+                            {% if item_properties[0][2] == 'video_game' %}
+                         <tr>
+                            <th> Platform </th>
+                            <td> {{ item_properties[0][3] }}</td>
+                        <tr>
+
+
+                         <tr>
+                            <th> Media </th>
+                            <td> {{ item_properties[0][4] }}</td>
+                        <tr>
+
+                        {% endif %}
+
+                         <tr>
+                            <th> Condition </th>
+                            <td> {{ item_properties[0][5] }}</td>
+                        <tr>
+
+                            {% if item_properties[0][2] == 'jigsaw' %}
+                         <tr>
+                            <th> Number of pieces </th>
+                            <td> {{ item_properties[0][6] }}</td>
+                        <tr>
+                        {% endif %}
+
+                            {% if item_properties[0][2] == 'computer_game' %}
+                         <tr>
+                            <th> OS </th>
+                            <td> {{ item_properties[0][7] }}</td>
+                        <tr>
+                        {% endif %}
+
+
+                            </th>
+                            <td >
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+
+
+
+
+                <td class = "regular_tb_cell">
+                    <h2>
+
+                    {% if item_owner != current_user %}
+                    </h2>
+                    <table >
+
+                     <tr>
+                            <th> Offered by</th>
+                            <td> {{ item_owner_nickname }}</td>
+                     <tr>
+
+                     <tr>
+                            <th> Location</th>
+                            <td> {{ item_properties[0][8] }}, {{ item_properties[0][9] }} {{ item_properties[0][10] }}</td>
+                     <tr>
+
+                      <tr>
+                            <th> Rating</th>
+                            <td> {{ owner_rating}}</td>
+                     <tr>
+
+                     <tr>
+                            <th> Distance</th>
+                            <td> {{item_properties[0][11]}} miles </td>
+                     <tr>
+
+                    </table>
+
+                {% if current_user_unrated_swaps <3 and current_user_unaccepted_swaps < 5 and
+                    item_swap_availability == None %}
+                 <a href="{{ url_for('gameswap.propose_swap') }}"> <input type="submit" value="Propose swap"></a>
+
+                {% endif %}
+                {% endif %}
+
+                </td>
+
+
+
+    </tbody>
+</table>
+
+
+
+{% endblock %}
+

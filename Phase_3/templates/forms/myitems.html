@@ -5,4 +5,59 @@
 {% endblock %}
 
 {% block content %}
+    <header>
+    <div>
+        <h1>Item counts</h1>
+        <table>
+            <thead>
+            <tr>
+                <th> Board games</th>
+                <th> Card games</th>
+                <th> Computer games</th>
+                <th> Jigsaw puzzles</th>
+                <th> Video games</th>
+                <th> Total</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th> {{ inventory_count[0] }}</th>
+                <th> {{ inventory_count[1] }}</th>
+                <th> {{ inventory_count[2] }}</th>
+                <th> {{ inventory_count[3] }}</th>
+                <th> {{ inventory_count[4] }}</th>
+                <th> {{ inventory_count[5] }}</th>
+            </tr>
+
+            </tbody>
+        </table>
+        <h1>My Items</h1>
+        <table><thead>
+            <tr>
+            <th> Item #</th>
+            <th> Game type</th>
+            <th> Title</th>
+            <th> Condition</th>
+            <th> Description</th>
+            <th> </th>
+
+            </tr>
+
+        </thead>
+            <tbody>
+            {%  for row in inventory_table %}
+            <tr>
+            <td> {{ row[0] }}</td>
+            <td> {{ row[2] }}</td>
+            <td> {{ row[1] }}</td>
+            <td> {{ row[3] }} </td>
+            <td> {{ row[4] | truncate(100) }}</td>
+            <td> </td>
+            </tr>
+            {%  endfor %}
+            </tbody>
+        </table>
+
+    </div>
+    </header>
 {% endblock %}

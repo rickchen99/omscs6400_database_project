@@ -2,7 +2,49 @@
 
 {% block header %}
   <h1>{% block title %}Update My Info{% endblock %}</h1>
+  <a href="{{ url_for('gameswap.main_menu') }}">Return to Main Menu</a>
 {% endblock %}
 
 {% block content %}
+  <form method="post">
+    <label for="Email">Email</label>
+	<a>{{ show_my_info[0] }}</a></br>
+    <label for="Password">Password</label>
+    <input type="password" name="password" id="password">
+    <label for="First Name">First Name</label>
+	<a>{{ show_my_info[3] }}</a>
+    <input name="first_name" id="first_name">
+    <label for="Last Name">Last Name</label>
+	<a>{{ show_my_info[4] }}</a>
+    <input type="last_name" name="last_name" id="last_name">
+    <label for="Nickname">Nickname</label>
+	<a>{{ show_my_info[2] }}</a>
+    <input name="nickname" id="nickname">
+    <label for="City">City</label>
+	<a>{{ show_my_info[9] }}</a></br>
+    <label for="State">State</label>
+	<a>{{ show_my_info[10] }}</a></br>
+    <label for="Postal Code">Postal Code</label>
+	<a>{{ show_my_info[5] }}</a>
+    <input name="postal_code" id="postal_code">
+    <label for="Phone Number">Phone Number (optional)</label>
+	<a>{{ show_my_info[6] }}</a>
+    <input name="phone_number" id="phone_number">
+    <label for="Phone Type">Type</label>
+    <select name="phone_type" id="phone_type">
+        <option value="Current">Current: {{ show_my_info[7] }}</option>
+        <option value="Home">Home</option>
+        <option value="Work">Work</option>
+        <option value="Mobile">Mobile</option>
+    </select>
+    </br>
+    <label for="Share Phone Number">Show phone number in swaps</label>
+	{% if show_my_info[8] == 1 %}
+	<a>Phone Number is currently shared. Check box to keep sharing if updating any other information.</a>
+	{% else %}
+	<a>Phone Number is not currently shared. Check box if you would like to share.</a>
+	{% endif %}
+    <input type="checkbox" id="share_phone_number" name="share_phone_number" value="1">
+    <input type="submit" value="Update">
+  </form>
 {% endblock %}

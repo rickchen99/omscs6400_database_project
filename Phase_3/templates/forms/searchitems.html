@@ -5,4 +5,42 @@
 {% endblock %}
 
 {% block content %}
+  <form method="post">
+
+    <label for="keyword">By kewords</label>
+    <input name="keyword" id="keyword"><br>
+
+    <label for="By my postal code">By my postal code</label>
+    <input name="my_postal_code" id="my_postal_code"><br>
+
+    <label for="Within X Miles">Within X Miles</label>
+    <input name="distance" id="distance"><br>
+
+
+    <label for="By postal code">By postal code</label>
+    <input name="postal_code" id="postal_code"><br>
+
+
+    <input type="submit" value="Search">
+
+  </form>
+
 {% endblock %}
+
+
+
+    <input type="radio" name="search" id="option1" value="option1"> By kewords:
+    <input name="search"><br>
+
+
+    <input type="radio" name="search" id="option2" value="option2"> In my postal code<br>
+
+
+    <input type="radio" name="search" id="option3" value="option3"> Within X mile of me
+    <input><br>
+
+    <input type="radio" name="search" id="option4" value="option4"> In postal code
+    <input><br>
+
+
+

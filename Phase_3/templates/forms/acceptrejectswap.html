@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Accept/Reject Swaps{% endblock %}</h1>
+{% endblock %}
+  <br>
+  <br>
+{% block content %}
+  {% if is_empty %}
+  <div>'No pending swaps to consider.'</div>
+  {% else %}
+  <table>
+    <thead>
+      <tr>
+          {% for n in cols %}
+          <th>{{n}}</th>
+          {% endfor %}
+      </tr>
+      </thead>    
+      <tbody>
+       {% for row in table %}  
+              <tr>
+                  <td>{{row[0]}}</td>
+                  <td>{{row[4]}}</td>
+                  <td>{{row[7]}}</td>
+                  <td>{{row[8]}}</td>
+                  <td>{{row[9]}}</td>
+                  <td>{{row[2]}}</td>
+                  </select>
+                </td>
+              <tr>
+  
+          {% endfor %}
+      </tbody>
+  </table>
+  {% endif %}
+{% endblock %}

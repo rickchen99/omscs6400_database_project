@@ -10,10 +10,22 @@
 		<h1>Welcome, {{ welcome_message[0] }} {{ welcome_message[1] }}!</h1>
 		<h1>My Rating</h1>
 		<div>{{ my_rating }}</div>
-		<h1>Unaccepted Swaps</h1>
-		<a href="{{ url_for('gameswap.accept_reject_swap') }}">{{ unaccepted_swaps }}</a>
+		<h1>Unaccepted Swaps</h1>	
+		{% if unaccepted_swaps > 5 or over_five_days_check > 5%}
+			<a href="{{ url_for('gameswap.accept_reject_swap') }}"style="color:red"><strong>{{ unaccepted_swaps }}</strong></a>
+		{% elif unaccepted_swaps > 0 %}
+			<a href="{{ url_for('gameswap.accept_reject_swap') }}">{{ unaccepted_swaps }}</a>		
+		{% else %}
+			<p>{{ unaccepted_swaps }}</p>
+		{% endif %}
 		<h1>Unrated Swaps</h1>
-		<a href="{{ url_for('gameswap.rate_swaps') }}">{{ unrated_swaps }}</a>
+		{% if unrated_swaps > 0 and unrated_swaps <= 2 %}
+    		<a href="{{ url_for('gameswap.rate_swaps') }}">{{ unrated_swaps }}</a>
+		{% elif unrated_swaps > 2 %}
+    		<a href="{{ url_for('gameswap.rate_swaps') }}" style="color:red"><strong>{{ unrated_swaps }}</strong></a>
+		{% else %}
+			<p>{{ unrated_swaps }}</p>
+		{% endif %}
 	<form>
 		<li><a href="{{ url_for('gameswap.list_item') }}">List Item</a></li>
 		<li><a href="{{ url_for('gameswap.my_items') }}">My Items</a></li>

@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+ <h1>{% block title %}Swap Details{% endblock %}</h1>
+{% block header %}
+ 
+
+ {% endblock %}  
+ {% block content %}
+<table>
+    <thead>
+     
+    </thead>    
+    <tbody>
+            <tr>
+                <td >
+                    <h3>
+                    Swap Details Form
+                    </h3>
+
+
+                    <table>   
+                        {% for head in swap_details_column_name %}
+                        <tr>
+                            {% set count_max = loop.length-1%}
+                            {% set counter = loop.index-1 %} <!-- turple starts at 0, but loop index start at 1-->
+                            {% for m in swap_details_element %}
+                            <th> 
+                                {{head}}                        
+                            </th>                  
+                            <td>
+                                           <!-- need to add if none, then drop box,submit button when selected-->                                              
+                                {% if head == 'Rating Left' and m[counter] == none and m[2]=='Accepted' %}
+                                <form method ='POST'>  
+                                <select name="user_input_rating" id="aaa">
+                                    <option value=null>  </option>
+                                    <option value=1> 1 </option>
+                                    <option value=2> 2 </option>
+                                    <option value=3> 3 </option>
+                                    <option value=4> 4 </option>
+                                    <option value=5> 5 </option>
+                                </select>  
+                               
+                                <input type="submit" name="submit_rating_deitals_form" onclick="get_selection()" value ="Submit"
+                                style="color: aliceblue;background-color: #8d98c7;font-size: 8px;padding: 4px 8px;
+                                text-align: center;
+                                display: inline-block;
+                                margin: 4px 2px; border-radius: 8px;"
+                                ></input>
+                                </form>
+                                {%else%}
+                                {{m[counter]}} 
+                                {%endif%}
+                            </td>
+                            {%endfor%}     
+                        </tr>
+                        {%endfor%}         
+                    </table>
+                </td>
+
+                <td>
+                    <h3>
+                    Other User
+                    </h3>
+                    <table>   
+                        {% for head in otheruser_column_names %}
+                        {% set counter = loop.index-1 %}
+                        {%if otheruser_column_elements|length==4 and counter<4 %}
+                        <tr>    
+                            
+                            <th> 
+                                
+                                {{head}}                        
+                            </th>      
+                                      
+                            <td>
+                                {%if head=='Distance'%}
+                                {{otheruser_column_elements[counter]}} miles
+                                {%else%}      
+                                {{otheruser_column_elements[counter]}} 
+                                {%endif%}                                                 
+                            </td>
+                                
+                        </tr>
+                        {%elif otheruser_column_elements|length==5 and counter<5 %}
+                        <tr>    
+                            
+                            <th> 
+                                
+                                {{head}}                        
+                            </th>      
+                                      
+                            <td>
+                                {%if head=='Distance'%}
+                                {{otheruser_column_elements[counter]}} miles
+                                {%else%}      
+                                {{otheruser_column_elements[counter]}} 
+                                {%endif%}                                                 
+                            </td>
+                                
+                        </tr>
+
+
+                        {%endif%}
+                        {%endfor%}         
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3>
+                    Proposed Item
+                    </h3>
+                    <table>   
+                        {% for head in item_pro_column_names %}
+                        <tr>
+                            {% set counter = loop.index-1 %} <!-- turple starts at 0, but loop index start at 1-->
+                            
+                            <th> 
+                                {{head}}                        
+                            </th>                  
+                            <td>
+                                {{item_pro_element[counter]}}                                                          
+                            </td>
+                               
+                        </tr>
+                        {%endfor%}         
+                    </table>
+                </td>
+                <td>
+                    <h3>
+                    Desired item
+                    </h3>
+                    <table>   
+                        {% for head in item_con_column_names %}
+                        <tr>
+                            {% set counter = loop.index-1 %} <!-- turple starts at 0, but loop index start at 1-->
+                            
+                            <th> 
+                                {{head}}                        
+                            </th>         
+                            <td>     
+                                {{item_con_element[counter]}}           
+                            </td>
+                                 
+                        </tr>
+                        {%endfor%}         
+                    </table>
+                </td>
+            </tr>
+
+    </tbody>
+</table>     
+{% endblock %}  

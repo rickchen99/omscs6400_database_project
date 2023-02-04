@@ -1,3 +1,26 @@
+<script>
+  function toggleOther(chosen){
+      if (chosen == 'Jigsaw puzzle') {
+          document.getElementById('jigsaw').style.display = 'block';
+          document.getElementById('video_game').style.display = 'none';
+          document.getElementById('computer_game').style.display = 'none';
+      } else if(chosen == 'Computer game'){
+          document.getElementById('jigsaw').style.display = 'none';
+          document.getElementById('video_game').style.display = 'none';
+          document.getElementById('computer_game').style.display = 'block';
+      } else if(chosen == 'Video game'){
+          document.getElementById('jigsaw').style.display = 'none';
+          document.getElementById('video_game').style.display = 'block';
+          document.getElementById('computer_game').style.display = 'none';
+      }
+      else {
+          document.getElementById('jigsaw').style.display = 'none';
+          document.getElementById('video_game').style.display = 'none';
+          document.getElementById('computer_game').style.display = 'none';
+      }
+  }
+</script>
+
 {% extends 'base.html' %}
 
 {% block header %}
@@ -5,4 +28,63 @@
 {% endblock %}
 
 {% block content %}
+
+  <form name = "listitem" method = "post">
+      <label for = "game_type">Game type</label>
+      <select name="game_type" id = "game_type" method="GET" action="/" onchange="toggleOther(this.value);">
+          <option value = "" selected data-default></option>
+          {% for type in game_type_options %}
+              <option value="{{type[0]}}">{{type[0]}}</option>"
+          {% endfor %}
+      </select>
+
+      <label for="title">Title</label>
+      <input type="text" name="title" id="title" required />
+
+      <label for="item_condition">Condition</label>
+
+      <select name = "item_condition" id = "item_condition">
+                      <option value = "" selected data-default></option>
+          {% for condition in condition_types %}
+              <option value = "{{condition}}" > {{ condition }} </option>
+          {% endfor %}
+      </select>
+
+      <div id = "jigsaw" style = "display:none">
+          <label for="jigsaw_dropdown" value = 1>Piece count</label>
+          <input type="number" name="jigsaw_dropdown" id="jigsaw_dropdown"/>
+      </div>
+
+      <div id = "computer_game" style = "display:none">
+          <label for="computer_game_platform_dropdown">Platform</label>
+          <select name = "computer_game_platform_dropdown" id = "computer_game_platform_dropdown">
+                      <option value = "" selected data-default></option>
+              {% for platform in computer_game_platform_types %}
+                  <option value = "{{ platform}}" > {{ platform }} </option>
+              {% endfor %}
+          </select>
+      </div>
+
+      <div id = "video_game" style = "display:none">
+          <label for="video_game_platform">Platform</label>
+          <select name = "video_game_platform" id = "video_game_platform" method = "GET" action = "/">
+                      <option value = "" selected data-default></option>
+              {% for platform in video_game_platform_types %}
+                  <option value = "{{ platform[0]}}" > {{ platform[0] }} </option>
+              {% endfor %}
+          </select>
+          <label for="video_game_media">Media</label>
+          <select name = "video_game_media" id = "video_game_media" method = "GET" action = "/">
+                      <option value = "" selected data-default></option>
+              {% for media in video_game_media_types %}
+                  <option value = "{{ media}}" > {{ media }} </option>
+              {% endfor %}
+          </select>
+      </div>
+          <label for="item_description">Description</label>
+      <input type="textbox" name="item_description" id="item_description">
+
+  <input type="submit" value="List Item">
+
+  </form>
 {% endblock %}
